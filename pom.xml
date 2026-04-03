@@ -32,6 +32,9 @@
         <surefire.version>3.0.0-M5</surefire.version>
         <junit.jupiter.version>5.6.2</junit.jupiter.version>
         <sonar.maven.version>3.7.0.1746</sonar.maven.version>
+
+        <sonar.organization>forester1234</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
