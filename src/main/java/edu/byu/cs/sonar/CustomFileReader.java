@@ -2,7 +2,6 @@ package edu.byu.cs.sonar;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -162,7 +161,7 @@ class CustomFileReader {
      */
     @Override
     public boolean equals(final Object object) {
-        if (object.getClass() != this.getClass()) {
+        if (object == null || object.getClass() != this.getClass()) {
             return false;
         }
 
