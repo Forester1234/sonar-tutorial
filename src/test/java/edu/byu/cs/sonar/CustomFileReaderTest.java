@@ -43,4 +43,81 @@ class CustomFileReaderTest {
         sut.setNewSentence(betterSentence);
         assertEquals(betterSentence, sut.getNewSentence());
     }
+
+    @Test
+    void testEquals_True() throws FileNotFoundException {
+        CustomFileReader reader1 = new CustomFileReader("readMe1.txt");
+        CustomFileReader reader2 = new CustomFileReader("readMe1.txt");
+
+        reader1.howManyWordsInFile();
+        reader2.howManyWordsInFile();
+
+        reader1.setNewSentence("Hello");
+        reader2.setNewSentence("Hello");
+
+        assertEquals(reader1, reader2);
+    }
+
+    @Test
+    void testEquals_False() throws FileNotFoundException {
+        CustomFileReader reader1 = new CustomFileReader("readMe1.txt");
+        CustomFileReader reader2 = new CustomFileReader("readMe2.txt");
+
+        reader1.howManyWordsInFile();
+        reader2.howManyWordsInFile();
+
+        reader1.setNewSentence("Same");
+        reader2.setNewSentence("Same");
+
+        assertNotEquals(reader1, reader2);
+    }
+
+    @Test
+    void testEquals_nullObject() {
+        CustomFileReader reader = new CustomFileReader("readMe1.txt");
+
+        assertNotEquals(null, reader);
+    }
+
+    @Test
+    void testEquals_differentClass() {
+        CustomFileReader reader = new CustomFileReader("readMe1.txt");
+
+        assertNotEquals("not a reader", reader);
+    }
+
+    @Test
+    void testEquals_differentSentences() {
+        CustomFileReader reader1=new CustomFileReader("readMe1.txt");
+        CustomFileReader reader2=new CustomFileReader("readMe1.txt");
+
+        reader1.setNewSentence("Hello");
+        reader2.setNewSentence("Goodbye");
+
+        assertNotEquals(reader1, reader2);
+    }
+
+    @Test
+    void testToString() throws FileNotFoundException {
+        CustomFileReader reader = new CustomFileReader("readMe1.txt");
+
+        reader.howManyWordsInFile();
+        reader.setNewSentence("Hello");
+
+        String result = reader.toString();
+
+        assertEquals("Hello 4", result);
+    }
+
+    @Test
+    void testHashCode() throws FileNotFoundException {
+        CustomFileReader reader = new CustomFileReader("readMe1.txt");
+
+        reader.howManyWordsInFile();
+        reader.setNewSentence("5");
+
+        int result = reader.hashCode();
+
+        assertEquals(5 * 4 * 3, result);
+    }
 }

@@ -175,6 +175,6 @@ class CustomFileReader {
             return false;
         }
 
-        return comparedReader.getPath() == path;
+        return comparedReader.getPath().equals(path);
     }
 }
