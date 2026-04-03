@@ -10,7 +10,17 @@ import java.io.FileNotFoundException;
  */
 // A console program that prints to System.out
 @SuppressWarnings({"squid:S106", "squid:S1166"})
-class Main {
+public final class Main {
+
+    private Main() {
+      throw new AssertionError("This class should not be instantiated");
+    }
+
+    /**
+     * The index in the command-line where the number of words is specified.
+     */
+    public static final int NUMBER_OF_WORDS_ARG = 3;
+
     /**
      * This program will take four arguments.
      * Program arguments should be arg[0] readMe1.txt, arg[1] readMe2.txt,
@@ -22,14 +32,16 @@ class Main {
         final CustomFileReader reader1 = new CustomFileReader(args[0]);
         final CustomFileReader reader2 = new CustomFileReader(args[1]);
         final CustomFileReader reader3 = new CustomFileReader(args[2]);
-        final int numberOfWords = Integer.parseInt(args[3]);
+        final int numberOfWords = Integer.parseInt(args[NUMBER_OF_WORDS_ARG]);
 
         try {
-            for (int i=0; i < numberOfWords; i++) {
+            for (int i = 0; i < numberOfWords; i++) {
               int howManyWords;
               howManyWords = reader1.howManyWordsInFile();
               final String wordFromIndex = reader2.returnThatWord(howManyWords);
-              final CharSequence firstLetter = wordFromIndex.substring(0, 1).toLowerCase();
+              final CharSequence firstLetter = wordFromIndex
+                      .substring(0, 1)
+                      .toLowerCase();
               reader3.findNewWord(firstLetter);
             }
 
@@ -38,7 +50,9 @@ class Main {
 
             System.out.println(reader1.getNewSentence());
         } catch (FileNotFoundException e) {
-            System.err.println("Did not find dictionary file. " + e.getMessage());
+            System.err.println(
+                    "Did not find dictionary file. " + e.getMessage()
+            );
         }
     }
 }

@@ -2,8 +2,9 @@ package edu.byu.cs.sonar;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.lang.reflect.Constructor;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
 
@@ -28,5 +29,15 @@ class MainTest {
       String output = errStream.toString();
       assertTrue(output.contains("Did not find dictionary file"));
 
+    }
+
+    @Test
+    void testPrivateConstructor() throws Exception {
+      Constructor<Main> constructor = Main.class.getDeclaredConstructor();
+      constructor.setAccessible(true);
+
+      Exception exception = assertThrows(Exception.class, constructor::newInstance);
+
+      assertTrue(exception.getCause() instanceof AssertionError);
     }
 }

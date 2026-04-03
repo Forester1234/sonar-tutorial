@@ -76,14 +76,15 @@ class CustomFileReaderTest {
     void testEquals_nullObject() {
         CustomFileReader reader = new CustomFileReader("readMe1.txt");
 
-        assertNotEquals(null, reader);
+      assertFalse(reader.equals(null));
     }
 
     @Test
     void testEquals_differentClass() {
         CustomFileReader reader = new CustomFileReader("readMe1.txt");
+        Object notAReader = new Object();
 
-        assertNotEquals("not a reader", reader);
+        assertNotEquals(reader, notAReader);
     }
 
     @Test
